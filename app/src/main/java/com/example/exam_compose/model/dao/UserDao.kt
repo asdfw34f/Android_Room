@@ -11,6 +11,6 @@ interface UserDao {
     fun getUserByBasicAuthentication(username:String, password:String): User
 
     @Insert
-    fun insert(user:User)
+    suspend fun insert(user:User)
 
 }
