@@ -11,15 +11,13 @@ import com.example.exam_compose.model.repository.IAviaRepository
 import com.example.exam_compose.model.repository.IFavoriteRepository
 import com.example.exam_compose.model.repository.IUserRepository
 import com.example.exam_compose.model.repository.UserRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application):ViewModel() {
     val allAvia: Flow<List<Avia>>
@@ -47,9 +45,6 @@ class MainViewModel(application: Application):ViewModel() {
         currentUser = userRepository.getUserByBasicAuthentication(username, password)
 
         val listFavorite = favoriteRepository.getById(currentUser.id)
-
-        val listavia: MutableList<Avia> = mutableListOf()
-
 
         listFavorite.collect{list->
             for (item in list){

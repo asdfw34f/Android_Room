@@ -26,17 +26,6 @@ abstract class AviaDatabase: RoomDatabase() {
                 AviaDatabase::class.java,
                 "test1.db"
             ).build()
-
-
-            val userDao = db.getUserDao()
-            userDao.insert(
-                User(
-                    id = 0,
-                    login = "testuser",
-                    password = "testpassword"
-                )
-            )
-
             return db
         }
 
